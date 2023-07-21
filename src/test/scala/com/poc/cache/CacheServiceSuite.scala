@@ -2,24 +2,20 @@ package com.poc.cache
 
 import cats.effect.{IO, SyncIO}
 import munit.CatsEffectSuite
-import io.chrisdavenport.mules.MemoryCache
-import io.chrisdavenport.mules.TimeSpec
-import cats.effect.IOApp
-import cats.effect.IO
-import io.chrisdavenport.mules.Cache
-import io.chrisdavenport.mules.MemoryCache
-import io.chrisdavenport.mules.TimeSpec
+import io.chrisdavenport.mules.{MemoryCache, TimeSpec, Cache}
 import scala.concurrent.duration.*
 import cats.effect.kernel.Resource
-import dev.profunktor.redis4cats.connection.RedisURI
-import dev.profunktor.redis4cats.connection.RedisClient
+
 import org.typelevel.log4cats.slf4j.Slf4jLogger
+import org.typelevel.log4cats.Logger
+
+import dev.profunktor.redis4cats.connection.{RedisURI, RedisClient}
 import dev.profunktor.redis4cats.data.RedisCodec
 import dev.profunktor.redis4cats.algebra.StringCommands
-import org.typelevel.log4cats.Logger
-import io.chrisdavenport.mules.redis.RedisCache
 import dev.profunktor.redis4cats.Redis
-import dev.profunktor.redis4cats.effect.Log.Stdout._
+import dev.profunktor.redis4cats.effect.Log.Stdout.*
+
+import com.poc.cache.RedisCache
 
 class CacheExampleSuite extends CatsEffectSuite {
 

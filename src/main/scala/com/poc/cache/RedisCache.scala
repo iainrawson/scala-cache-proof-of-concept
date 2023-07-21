@@ -1,4 +1,4 @@
-package io.chrisdavenport.mules.redis
+package com.poc.cache
 
 import cats.*
 import cats.implicits.*
