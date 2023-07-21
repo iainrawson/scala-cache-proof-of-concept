@@ -1,5 +1,9 @@
 package com.poc.cache
 
+import cats.effect.{IO, SyncIO}
+import munit.CatsEffectSuite
+import io.chrisdavenport.mules.MemoryCache
+import io.chrisdavenport.mules.TimeSpec
 import cats.effect.IOApp
 import cats.effect.IO
 import io.chrisdavenport.mules.Cache
@@ -7,16 +11,16 @@ import io.chrisdavenport.mules.MemoryCache
 import io.chrisdavenport.mules.TimeSpec
 import scala.concurrent.duration.*
 
-object Main extends IOApp.Simple {
+class CacheExampleSuite extends CatsEffectSuite {
 
-  def run: IO[Unit] =
-  
+  test("CacheExample returns Some(1) using MemoryCache") {
+
     val program = for
       c: Cache[IO, String, Int] <- MemoryCache.ofSingleImmutableMap[IO, String, Int](Some(TimeSpec.unsafeFromDuration(1.second)))
-      _ <- CacheExample.insertAndGet(c).flatMap(IO.println)
-    yield ()
+      result <- CacheExample.insertAndGet(c)
+    yield result
 
-    program
+    assertIO(program, Some(1))
     
-
+  }
 }
