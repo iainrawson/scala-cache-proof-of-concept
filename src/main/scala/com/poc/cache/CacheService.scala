@@ -5,12 +5,12 @@ import io.chrisdavenport.mules.*
 import cats.effect.IO
 import cats.effect.unsafe.implicits.global
 
-object CacheExample {
+object CacheService {
 
-  def insertAndGet(cache: Cache[IO, String, Int]): IO[Option[Int]] =
+  def insertAndGet(cache: Cache[IO, String, String]): IO[Option[String]] =
     for {
-      _ <- cache.insert("Foo", 1)
-      value <- cache.lookup("Foo")
+      _ <- cache.insert("foo", "bar")
+      value <- cache.lookup("foo")
     } yield value
 
 }
