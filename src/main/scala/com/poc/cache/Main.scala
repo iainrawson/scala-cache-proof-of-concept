@@ -10,13 +10,15 @@ import scala.concurrent.duration.*
 object Main extends IOApp.Simple {
 
   def run: IO[Unit] =
-  
+
     val program = for
-      c: Cache[IO, String, Int] <- MemoryCache.ofSingleImmutableMap[IO, String, Int](Some(TimeSpec.unsafeFromDuration(1.second)))
+      c: Cache[IO, String, Int] <- MemoryCache
+        .ofSingleImmutableMap[IO, String, Int](
+          Some(TimeSpec.unsafeFromDuration(1.second))
+        )
       _ <- CacheExample.insertAndGet(c).flatMap(IO.println)
     yield ()
 
     program
-    
 
 }

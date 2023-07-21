@@ -9,8 +9,8 @@ object CacheExample {
 
   def insertAndGet(cache: Cache[IO, String, Int]): IO[Option[Int]] =
     for {
-        _     <- cache.insert("Foo", 1)
-        value <- cache.lookup("Foo")
-      } yield value
+      _ <- cache.insert("Foo", 1)
+      value <- cache.lookup("Foo")
+    } yield value
 
 }

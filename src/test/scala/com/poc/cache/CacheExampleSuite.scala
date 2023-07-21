@@ -16,11 +16,14 @@ class CacheExampleSuite extends CatsEffectSuite {
   test("CacheExample returns Some(1) using MemoryCache") {
 
     val program = for
-      c: Cache[IO, String, Int] <- MemoryCache.ofSingleImmutableMap[IO, String, Int](Some(TimeSpec.unsafeFromDuration(1.second)))
+      c: Cache[IO, String, Int] <- MemoryCache
+        .ofSingleImmutableMap[IO, String, Int](
+          Some(TimeSpec.unsafeFromDuration(1.second))
+        )
       result <- CacheExample.insertAndGet(c)
     yield result
 
     assertIO(program, Some(1))
-    
+
   }
 }
