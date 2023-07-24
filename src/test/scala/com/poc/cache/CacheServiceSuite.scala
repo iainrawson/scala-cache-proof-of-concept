@@ -53,7 +53,7 @@ class CacheExampleSuite extends CatsEffectSuite {
 
   }
 
-  test("CacheService can return None using NotACache") {
+  test("CacheService can return None using NeverCache") {
 
 
     val c: Cache[IO, String, String] = NeverCache.of[IO, String, String]()
