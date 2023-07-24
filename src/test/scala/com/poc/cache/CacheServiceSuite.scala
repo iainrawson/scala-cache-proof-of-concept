@@ -51,4 +51,18 @@ class CacheExampleSuite extends CatsEffectSuite {
       }
 
   }
+
+  test("CacheService can return None using NotACache") {
+
+
+    val c: Cache[IO, String, String] = NotACache.of[IO, String, String]()
+
+    val program = for
+      result <- CacheService.insertAndGet(c)
+    yield result
+
+    assertIO(program, None)
+
+  }
+
 }
