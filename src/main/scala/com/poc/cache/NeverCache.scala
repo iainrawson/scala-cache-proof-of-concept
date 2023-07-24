@@ -11,12 +11,12 @@ import io.chrisdavenport.mules.TimeSpec
 import scala.concurrent.duration.*
 import cats.effect.kernel.Async
 
-object NotACache {
+object NeverCache {
 
   def of[F[_]: Applicative, K, V](): Cache[F, K, V] =
-    new NotACacheImpl[F, K, V]()
+    new NeverCacheImpl[F, K, V]()
 
-  private class NotACacheImpl[F[_]: Applicative, K, V]() extends Cache[F, K, V] {
+  private class NeverCacheImpl[F[_]: Applicative, K, V]() extends Cache[F, K, V] {
     def insert(k: K, v: V): F[Unit] = ().pure[F]
     def lookup(k: K): F[Option[V]] = None.pure[F]
     def delete(k: K): F[Unit] = ().pure[F]

@@ -16,6 +16,7 @@ import dev.profunktor.redis4cats.Redis
 import dev.profunktor.redis4cats.effect.Log.Stdout.*
 
 import com.poc.cache.RedisCache
+import com.poc.cache.NeverCache
 
 class CacheExampleSuite extends CatsEffectSuite {
 
@@ -55,7 +56,7 @@ class CacheExampleSuite extends CatsEffectSuite {
   test("CacheService can return None using NotACache") {
 
 
-    val c: Cache[IO, String, String] = NotACache.of[IO, String, String]()
+    val c: Cache[IO, String, String] = NeverCache.of[IO, String, String]()
 
     val program = for
       result <- CacheService.insertAndGet(c)
